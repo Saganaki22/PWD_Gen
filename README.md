@@ -34,6 +34,10 @@ Visit the live demo at: https://saganaki22.github.io/PWD_Gen/
 - [Chrome Extension](https://chrome.google.com/webstore/detail/pwd-gen/coming-soon)
 - [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/pwd-gen/coming-soon)
 
+This repository includes the unpacked extensions for both browsers:
+- `/chrome` - Unpacked extension for Chrome/Edge (Load as "Load unpacked extension")
+- `/firefox` - Unpacked extension for Firefox (Load as "Load Temporary Add-on")
+
 ## Security Features
 
 - Client-side password generation
