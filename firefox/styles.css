@@ -1,0 +1,257 @@
+:root {
+  --bg-color: #f8f9fa;
+  --text-color: #212529;
+  --container-bg: white;
+  --input-bg: #f8f9fa;
+  --hover-bg: #e9ecef;
+  --border-color: rgba(0,0,0,0.1);
+  --github-logo-filter: brightness(0) saturate(100%) invert(23%) sepia(10%) saturate(500%) hue-rotate(177deg) brightness(94%) contrast(91%);
+}
+
+[data-theme="dark"] {
+  --bg-color: #212529;
+  --text-color: #f8f9fa;
+  --container-bg: #343a40;
+  --input-bg: #495057;
+  --hover-bg: #6c757d;
+  --border-color: rgba(255,255,255,0.1);
+  --github-logo-filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(175deg) brightness(103%) contrast(103%);
+}
+
+body {
+  width: 480px;
+  margin: 0;
+  padding: 15px 15px 23px 15px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  min-height: 450px;
+  max-height: 450px;
+  overflow: hidden;
+}
+
+.container {
+  padding: 0;
+  height: 100%;
+}
+
+.password-container {
+  background: var(--container-bg);
+  border-radius: 15px;
+  padding: 1.25rem;
+  padding-bottom: 1.5rem;
+  box-shadow: 0 0 20px var(--border-color);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.notification {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  padding: 10px 20px;
+  border-radius: 0 0 8px 8px;
+  transition: transform 0.3s ease-in-out;
+  z-index: 1000;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.notification.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+.notification.success {
+  background: #198754;
+}
+
+.notification.error {
+  background: #dc3545;
+}
+
+.strength-meter {
+  height: 8px;
+  border-radius: 4px;
+  margin-top: 10px;
+  transition: all 0.3s;
+  max-width: 100%;
+  background-color: #e9ecef;
+  overflow: hidden;
+}
+
+.strength-label {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.strength-warning {
+  margin-top: 3px;
+  font-size: 0.85rem;
+  color: #dc3545;
+}
+
+.form-check-input:checked {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+.btn-generate {
+  background: #198754;
+  border: none;
+  padding: 10px 20px;
+  margin-top: auto;
+}
+
+.btn-generate:hover {
+  background: #146c43;
+}
+
+.password-output-container {
+  background: var(--input-bg);
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.password-input-wrapper {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+}
+
+.clickable-input {
+  cursor: pointer;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  color: var(--text-color) !important;
+  background-color: transparent !important;
+}
+
+.clickable-input:hover {
+  background-color: var(--hover-bg) !important;
+}
+
+.clickable-input.expanded {
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.copy-button {
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 0.375rem 0.75rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.copy-button:hover {
+  background-color: var(--hover-bg);
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.title-container h1 {
+  text-align: center;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.logo-svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.logo-svg path {
+  stroke: var(--text-color);
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  margin-left: auto;
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-bg);
+}
+
+.form-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+#passwordLengthValue {
+  margin-left: 0.5rem;
+}
+
+.toggle-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.form-check {
+  margin: 0;
+}
+
+.github-link {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  padding-top: 1rem;
+  text-decoration: none;
+}
+
+.github-logo {
+  width: 38px;
+  height: 38px;
+  transition: all 0.3s ease;
+  filter: var(--github-logo-filter);
+}
+
+.github-logo:hover {
+  transform: scale(1.1);
+  filter: var(--github-logo-filter) drop-shadow(0 0 5px currentColor);
+  animation: breathe 2s infinite ease-in-out;
+}
+
+@keyframes breathe {
+  0% {
+    filter: var(--github-logo-filter) drop-shadow(0 0 2px currentColor);
+  }
+  50% {
+    filter: var(--github-logo-filter) drop-shadow(0 0 8px currentColor);
+  }
+  100% {
+    filter: var(--github-logo-filter) drop-shadow(0 0 2px currentColor);
+  }
+}
