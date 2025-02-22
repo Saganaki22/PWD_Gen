@@ -4,8 +4,6 @@ A modern, secure password generator with a clean interface and real-time strengt
 
 ![og-img](https://github.com/user-attachments/assets/9b09fe74-fb95-496e-99c1-eced35c73479)
 
-
-
 | Light Theme | Dark Theme |
 |------------|------------|
 | ![image](https://github.com/user-attachments/assets/c752f153-55d6-4894-950d-197a4bafa21c) | ![image](https://github.com/user-attachments/assets/91193fef-8030-4901-ae1b-cacc5f321fa6) |
