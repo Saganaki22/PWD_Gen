@@ -1,4 +1,4 @@
-# PWD Gen - Password Generator
+# PWD Gen - Password Generator [Chrome / Firefox plugin]
 
 A modern, secure password generator with a clean interface and real-time strength indication. Available both as a browser extension and a web application.
 
