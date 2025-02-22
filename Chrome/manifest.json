@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "PWD Gen",
+  "version": "1.0",
+  "description": "A secure password generator extension",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icons/16.png",
+      "28": "icons/28.png",
+      "64": "icons/64.png",
+      "128": "icons/128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "28": "icons/28.png",
+    "64": "icons/64.png",
+    "128": "icons/128.png"
+  },
+  "permissions": ["clipboardWrite"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; style-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com"
+  }
+}
