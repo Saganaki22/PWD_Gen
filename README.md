@@ -1,14 +1,11 @@
 # PWD Gen - Password Generator
 
+A modern, secure password generator with a clean interface and real-time strength indication. Available both as a browser extension and a web application.
 
 | Light Theme | Dark Theme |
 |------------|------------|
 | ![image](https://github.com/user-attachments/assets/c752f153-55d6-4894-950d-197a4bafa21c) | ![image](https://github.com/user-attachments/assets/91193fef-8030-4901-ae1b-cacc5f321fa6) |
 
-
-
-
-A modern, secure password generator with a clean interface and real-time strength indication. Available both as a browser extension and a web application.
 
 ## Features
 
