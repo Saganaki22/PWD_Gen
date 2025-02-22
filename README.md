@@ -1,5 +1,8 @@
 # PWD Gen - Password Generator
 
+![image](https://github.com/user-attachments/assets/91193fef-8030-4901-ae1b-cacc5f321fa6)
+
+
 A modern, secure password generator with a clean interface and real-time strength indication. Available both as a browser extension and a web application.
 
 ## Features
