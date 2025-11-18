@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PWD Gen - Modern Password Generator</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico"> 
     
     <!-- Primary Meta Tags -->
     <meta name="title" content="PWD Gen - Modern Password Generator">
@@ -29,83 +29,166 @@
     <meta property="twitter:description" content="A modern, secure password generator with a clean interface and real-time strength indication. Available both as a browser extension and a web application.">
     <meta property="twitter:image" content="https://i.ibb.co/PZJh1X27/og-img.png">
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (Replaces Bootstrap for the modern UI) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
     <link href="styles.css" rel="stylesheet">
-  </head>
-  <body>
-    <div class="container">
-      <div class="password-container">
-        <div class="title-container">
-          <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 8.00169L16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V8.00169M16 8.00169C15.7563 8 15.4907 8 15.2 8H8.8C8.50929 8 8.24373 8 8 8.00169M16 8.00169C17.1649 8.00979 17.8313 8.05658 18.362 8.32698C18.9265 8.6146 19.3854 9.07354 19.673 9.63803C20 10.2798 20 11.1198 20 12.8V16.2C20 17.8802 20 18.7202 19.673 19.362C19.3854 19.9265 18.9265 20.3854 18.362 20.673C17.7202 21 16.8802 21 15.2 21H8.8C7.11984 21 6.27976 21 5.63803 20.673C5.07354 20.3854 4.6146 19.9265 4.32698 19.362C4 18.7202 4 17.8802 4 16.2V12.8C4 11.1198 4 10.2798 4.32698 9.63803C4.6146 9.07354 5.07354 8.6146 5.63803 8.32698C6.16873 8.05658 6.83507 8.00979 8 8.00169M10 11V18M14 11V18M8.5 12.5H15.5M8.5 16.5H15.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <h1 class="mb-0 flex-grow-1 text-center">PWD Gen</h1>
-          <button class="theme-toggle" id="themeToggle" title="Toggle theme">
-            ☀️
-          </button>
-        </div>
 
-        <div class="mb-4">
-          <label class="form-label d-flex">
-            Password Length: <span id="passwordLengthValue">16</span>
-          </label>
-          <input type="range" class="form-range" id="passwordLength" min="8" max="64" value="16">
-          <div class="strength-meter" id="strengthMeter"></div>
-          <div class="strength-label" id="strengthLabel"></div>
-          <div class="strength-warning" id="strengthWarning"></div>
-        </div>
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                fontFamily: {
+                    sans: ['Inter', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        glass: 'rgba(255, 255, 255, 0.1)',
+                        glassBorder: 'rgba(255, 255, 255, 0.2)',
+                        primary: '#6366f1', // Indigo 500
+                        primaryDark: '#4f46e5', // Indigo 600
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center p-4 relative overflow-hidden selection:bg-primary selection:text-white">
 
-        <div class="toggle-container">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="uppercaseToggle" checked>
-            <label class="form-check-label" for="uppercaseToggle">
-              Uppercase (A-Z)
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="lowercaseToggle" checked>
-            <label class="form-check-label" for="lowercaseToggle">
-              Lowercase (a-z)
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="numbersToggle" checked>
-            <label class="form-check-label" for="numbersToggle">
-              Numbers (0-9)
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="symbolsToggle" checked>
-            <label class="form-check-label" for="symbolsToggle">
-              Symbols (!@#$%^&*)
-            </label>
-          </div>
-        </div>
-
-        <div class="password-output-container">
-          <div class="password-input-wrapper">
-            <input type="text" class="form-control border-0 bg-transparent clickable-input" id="passwordOutput" readonly title="Click to copy password">
-          </div>
-          <button class="btn copy-button" type="button" id="copyButton" title="Copy password">
-            <i class="fas fa-copy"></i>
-          </button>
-        </div>
-
-        <button type="button" class="btn btn-generate btn-primary" id="generatePasswordButton">
-          Generate Password
-        </button>
-
-        <a href="https://github.com/Saganaki22/PWD_Gen" class="github-link" target="_blank" rel="noopener noreferrer">
-          <img src="Logo/github.svg" alt="GitHub" class="github-logo">
-        </a>
-      </div>
+    <!-- Ambient Background Blobs -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl opacity-40 animate-blob animation-delay-4000"></div>
     </div>
 
-    <div class="notification" id="notification">
-      <i class="fas fa-check-circle me-2"></i>Password copied!
+    <div class="w-full max-w-md">
+        <!-- Main Card -->
+        <div class="backdrop-blur-xl bg-gray-800/60 border border-white/10 rounded-3xl shadow-2xl p-6 md:p-8 relative overflow-hidden transition-all duration-300">
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-3">
+                    <!-- Logo Icon Container -->
+                    <div class="p-2 bg-gradient-to-br from-primary to-purple-600 rounded-xl shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-bold tracking-wide">PWD Gen</h1>
+                </div>
+                <button id="themeToggle" class="p-2 rounded-full hover:bg-white/10 transition-colors text-gray-400 hover:text-white" title="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+
+            <!-- Password Output Display -->
+            <div class="relative group mb-6">
+                <!-- Glow Effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 rounded-xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
+                
+                <!-- Input Container -->
+                <div class="relative bg-gray-900/80 border border-white/10 rounded-xl p-4 flex items-center justify-between">
+                    <input type="text" id="passwordOutput" readonly 
+                           class="bg-transparent border-none outline-none text-gray-100 text-lg md:text-xl font-mono tracking-wider w-full mr-4 cursor-pointer truncate"
+                           placeholder="Generating..." title="Click to copy">
+                    
+                    <button id="copyButton" class="text-gray-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/10 active:scale-95" title="Copy password">
+                        <i class="far fa-copy text-xl"></i>
+                    </button>
+                </div>
+                
+                <!-- Strength Bar -->
+                <div class="h-1 w-full bg-gray-700 mt-2 rounded-full overflow-hidden">
+                    <div id="strengthMeterBar" class="h-full w-0 transition-all duration-500 ease-out bg-red-500"></div>
+                </div>
+                <div class="flex justify-between mt-2 text-xs font-medium">
+                    <span id="strengthLabel" class="text-gray-400">Weak</span>
+                    <span id="passwordLengthLabel" class="text-gray-400">Length: <span id="passwordLengthValue" class="text-white">16</span></span>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="space-y-6">
+                <!-- Length Slider -->
+                <div class="space-y-3">
+                    <input type="range" id="passwordLength" min="8" max="64" value="16" 
+                           class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer custom-range">
+                </div>
+
+                <!-- Toggles Grid -->
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Uppercase -->
+                    <label class="flex items-center justify-between p-3 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer group">
+                        <span class="text-sm font-medium text-gray-300 group-hover:text-white">Uppercase (A-Z)</span>
+                        <div class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="uppercaseToggle" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                        </div>
+                    </label>
+
+                    <!-- Lowercase -->
+                    <label class="flex items-center justify-between p-3 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer group">
+                        <span class="text-sm font-medium text-gray-300 group-hover:text-white">Lowercase (a-z)</span>
+                        <div class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="lowercaseToggle" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                        </div>
+                    </label>
+
+                    <!-- Numbers -->
+                    <label class="flex items-center justify-between p-3 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer group">
+                        <span class="text-sm font-medium text-gray-300 group-hover:text-white">Numbers (0-9)</span>
+                        <div class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="numbersToggle" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                        </div>
+                    </label>
+
+                    <!-- Symbols -->
+                    <label class="flex items-center justify-between p-3 bg-white/5 border border-white/5 rounded-xl hover:bg-white/10 transition-colors cursor-pointer group">
+                        <span class="text-sm font-medium text-gray-300 group-hover:text-white">Symbols (!@#$)</span>
+                        <div class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="symbolsToggle" class="sr-only peer" checked>
+                            <div class="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary/50 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Generate Button -->
+                <button id="generatePasswordButton" class="w-full py-4 bg-gradient-to-r from-primary to-purple-600 hover:from-primaryDark hover:to-purple-700 rounded-xl font-bold text-white shadow-lg shadow-primary/25 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center gap-2 group">
+                    <span>Generate Password</span>
+                    <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Github Footer -->
+        <div class="text-center mt-8">
+             <a href="https://github.com/Saganaki22/PWD_Gen" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors opacity-70 hover:opacity-100">
+                <!-- Using FontAwesome GitHub icon for simplicity, or use your SVG -->
+                <i class="fab fa-github text-xl"></i>
+                <span class="text-sm">View on GitHub</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 border border-white/10 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-300 z-50">
+        <i class="fas fa-check-circle text-green-400"></i>
+        <span id="notificationText" class="font-medium text-sm">Password copied!</span>
     </div>
 
     <script src="index.js"></script>
-  </body>
+</body>
 </html>
